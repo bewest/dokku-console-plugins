@@ -27,6 +27,11 @@ case "$1" in
     echo git show $DOKKU_ROOT/$2
     git show $DOKKU_ROOT/$2
   ;;
+  list)
+    for x in $DOKKU_ROOT/*; do
+      echo $x
+    done
+  ;;
   help)
     cat && cat <<EOF
     console <app>   # tail -f the live app console
