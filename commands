@@ -11,6 +11,7 @@ function container_for ( ) {
 case "$1" in
   console)
     container=$(container_for $2)
+    echo "console for $container ($2)"
     exec docker attach $container
   ;;
   prompt)
@@ -24,8 +25,7 @@ case "$1" in
     
   ;;
   version)
-    echo git show $DOKKU_ROOT/$2
-    git show $DOKKU_ROOT/$2
+    ( cd $DOKKU_ROOT/$2;  git rev-parse HEAD )
   ;;
   list)
     for x in $DOKKU_ROOT/*; do
