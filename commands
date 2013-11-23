@@ -17,14 +17,15 @@ case "$1" in
   prompt)
     container=$(container_for $2)
     if [[ -n $container ]] ; then
-      docker run -i -t app/$2 /bin/bash
+      echo exec docker run -i -t app/$2 /bin/bash
+      cat && exec docker run -i -t app/$2 /bin/bash
     fi
     
   ;;
   console:rebuild)
     container=$(container_for $2)
     if [[ -n $container ]] ; then
-      exec docker run -i -t app/$2 /bin/bash -c /build/builder
+      cat && exec docker run -i -t app/$2 /bin/bash -c /build/builder
     fi
     
   ;;
