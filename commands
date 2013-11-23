@@ -16,12 +16,12 @@ case "$1" in
   ;;
   prompt)
     container=$(container_for $2)
-    cat && exec docker run -i -t $container /bin/bash
+    echo exec docker run -i -t $container /bin/bash
+    exec docker run -i -t $container /bin/bash
     
   ;;
   console:rebuild)
     container=$(container_for $2)
-    echo exec docker run -i -t $container /bin/bash -c /build/builder
     exec docker run -i -t $container /bin/bash -c /build/builder
     
   ;;
