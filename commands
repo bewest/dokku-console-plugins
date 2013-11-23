@@ -34,6 +34,17 @@ case "$1" in
       fi
     done
   ;;
+  list:all)
+    echo "app container revision"
+    for x in $DOKKU_ROOT/*; do
+      if [[ -d $x && -f $x/CONTAINER ]] ; then
+        app=$(basename $x)
+        container=$(cat $x/CONTAINER)
+        rev=$( (cd $x; git rev-parse HEAD) )
+        echo "$app" "$container" "$rev"
+      fi
+    done
+  ;;
   help)
     cat && cat <<EOF
     console <app>   # tail -f the live app console
