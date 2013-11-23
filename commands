@@ -16,7 +16,7 @@ case "$1" in
   ;;
   prompt)
     container=$(container_for $2)
-    exec docker run -i -t $container /bin/bash
+    cat && exec docker run -i -t $container /bin/bash
     
   ;;
   console:rebuild)
