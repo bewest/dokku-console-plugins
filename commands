@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+export DOKKU_ROOT=${DOKKU_ROOT:='/home/git'}
+
+function container_for ( ) {
+  APP=$1
+  cat $DOKKU_ROOT/$APP/CONTAINER
+}
+
+case "$1" in
+  console)
+    container=$(container_for $2)
+    docker attach $container
+  ;;
+  prompt)
+    container=$(container_for $2)
+    docker run -i -t $container /bin/bash
+    
+  ;;
+  console:rebuild)
+    container=$(container_for $2)
+    docker run -i -t $container /bin/bash -c /build/builder
+    
+  ;;
+  help)
+    cat && cat <<EOF
+    console <app>   # tail -f the live app console
+    prompt <app>   # live prompt in your app's container
+    console:rebuild <app>   # force rebuild of buildpack
+EOF
+  ;;
+esac
+cat
+
