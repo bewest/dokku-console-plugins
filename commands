@@ -11,16 +11,16 @@ function container_for ( ) {
 case "$1" in
   console)
     container=$(container_for $2)
-    docker attach $container
+    exec docker attach $container
   ;;
   prompt)
     container=$(container_for $2)
-    docker run -i -t $container /bin/bash
+    exec docker run -i -t $container /bin/bash
     
   ;;
   console:rebuild)
     container=$(container_for $2)
-    docker run -i -t $container /bin/bash -c /build/builder
+    exec docker run -i -t $container /bin/bash -c /build/builder
     
   ;;
   help)
