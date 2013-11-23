@@ -29,7 +29,9 @@ case "$1" in
   ;;
   list)
     for x in $DOKKU_ROOT/*; do
-      echo $x
+      if [[ -d $x ]] ; then
+        basename $x
+      fi
     done
   ;;
   help)
