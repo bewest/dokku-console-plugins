@@ -16,13 +16,16 @@ case "$1" in
   ;;
   prompt)
     container=$(container_for $2)
-    echo exec docker run -i -t $container /bin/bash
-    exec docker run -i -t $container /bin/bash
+    if [[ -n $container ]] ; then
+      docker run -i -t app/$2 /bin/bash
+    fi
     
   ;;
   console:rebuild)
     container=$(container_for $2)
-    exec docker run -i -t $container /bin/bash -c /build/builder
+    if [[ -n $container ]] ; then
+      exec docker run -i -t app/$2 /bin/bash -c /build/builder
+    fi
     
   ;;
   version)
