@@ -23,6 +23,10 @@ case "$1" in
     exec docker run -i -t $container /bin/bash -c /build/builder
     
   ;;
+  version)
+    echo git show $DOKKU_ROOT/$2
+    git show $DOKKU_ROOT/$2
+  ;;
   help)
     cat && cat <<EOF
     console <app>   # tail -f the live app console
