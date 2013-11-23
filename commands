@@ -47,9 +47,12 @@ case "$1" in
   ;;
   help)
     cat && cat <<EOF
-    console <app>   # tail -f the live app console
-    prompt <app>   # live prompt in your app's container
-    console:rebuild <app>   # force rebuild of buildpack
+    console <app>          # tail -f the live app console
+    prompt <app>           # live prompt in your app's container
+    console:rebuild <app>  # force rebuild of buildpack
+    version                # commit hash of deployed app
+    list                   # list all apps
+    list:all               # list mapping of apps, containers, commit
 EOF
   ;;
 esac
