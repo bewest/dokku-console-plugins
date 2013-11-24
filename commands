@@ -31,7 +31,7 @@ case "$1" in
   ;;
   rev-parse)
     APP="${DOKKU_ROOT}/${2}"
-    REV=${3:="HEAD"}
+    REV=${3:-'HEAD'}
     ( cd $APP;  git rev-parse $REV )
   ;;
   list)
