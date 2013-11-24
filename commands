@@ -13,7 +13,6 @@ case "$1" in
     container=$(container_for $2)
     echo "console for $container ($2)"
     exec docker attach $container
-    cat
   ;;
   prompt)
     container=$(container_for $2)
@@ -21,7 +20,6 @@ case "$1" in
       echo exec docker run -i -t app/$2 /bin/bash
       cat && exec docker run -i -t app/$2 /bin/bash
     fi
-    cat
     
   ;;
   console:rebuild)
@@ -29,8 +27,7 @@ case "$1" in
     if [[ -n $container ]] ; then
       cat && exec docker run -i -t app/$2 /bin/bash -c /build/builder
     fi
-    cat
-    
+
   ;;
   rev-parse)
     APP="${DOKKU_ROOT}/${2}"
@@ -43,7 +40,7 @@ case "$1" in
         basename $x
       fi
     done
-    cat
+
   ;;
   list:all)
     echo "app container revision"
@@ -55,7 +52,7 @@ case "$1" in
         echo "$app" "$container" "$rev"
       fi
     done
-    cat
+
   ;;
   help)
     cat && cat <<EOF
@@ -68,5 +65,5 @@ case "$1" in
 EOF
   ;;
 esac
-cat
+
 
