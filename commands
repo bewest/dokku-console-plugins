@@ -17,21 +17,21 @@ case "$1" in
   prompt)
     container=$(container_for $2)
     if [[ -n $container ]] ; then
-      echo exec docker run -i -t app/$2 /bin/bash
-      cat && exec docker run -i -t app/$2 /bin/bash
+      echo docker run -i -t app/$2 /bin/bash
+      docker run -i -t app/$2 /bin/bash
     fi
     
   ;;
   console:rebuild)
     container=$(container_for $2)
     if [[ -n $container ]] ; then
-      cat && exec docker run -i -t app/$2 /bin/bash -c /build/builder
+      docker run -i -t app/$2 /bin/bash -c /build/builder
     fi
 
   ;;
   rev-parse)
     APP="${DOKKU_ROOT}/${2}"
-    REV=${3:'HEAD'}
+    REV=${3:="HEAD"}
     ( cd $APP;  git rev-parse $REV )
   ;;
   list)
