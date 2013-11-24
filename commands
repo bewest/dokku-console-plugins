@@ -30,7 +30,9 @@ case "$1" in
     
   ;;
   version)
-    ( cd $DOKKU_ROOT/$2;  git rev-parse HEAD )
+    APP="${DOKKU_ROOT}/${2}"
+    REV=${3:='HEAD'}
+    ( cd $APP;  git rev-parse $REV )
   ;;
   list)
     for x in $DOKKU_ROOT/*; do
