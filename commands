@@ -22,6 +22,10 @@ case "$1" in
     fi
     
   ;;
+  whoami)
+   echo $NAME
+   env
+  ;;
   console:rebuild)
     container=$(container_for $2)
     if [[ -n $container ]] ; then
