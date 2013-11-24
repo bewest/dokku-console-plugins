@@ -13,6 +13,7 @@ case "$1" in
     container=$(container_for $2)
     echo "console for $container ($2)"
     exec docker attach $container
+    cat
   ;;
   prompt)
     container=$(container_for $2)
@@ -20,6 +21,7 @@ case "$1" in
       echo exec docker run -i -t app/$2 /bin/bash
       cat && exec docker run -i -t app/$2 /bin/bash
     fi
+    cat
     
   ;;
   console:rebuild)
@@ -27,9 +29,10 @@ case "$1" in
     if [[ -n $container ]] ; then
       cat && exec docker run -i -t app/$2 /bin/bash -c /build/builder
     fi
+    cat
     
   ;;
-  version)
+  rev-parse)
     APP="${DOKKU_ROOT}/${2}"
     REV=${3:='HEAD'}
     ( cd $APP;  git rev-parse $REV )
@@ -40,6 +43,7 @@ case "$1" in
         basename $x
       fi
     done
+    cat
   ;;
   list:all)
     echo "app container revision"
@@ -51,13 +55,14 @@ case "$1" in
         echo "$app" "$container" "$rev"
       fi
     done
+    cat
   ;;
   help)
     cat && cat <<EOF
     console <app>          # tail -f the live app console
     prompt <app>           # live prompt in your app's container
     console:rebuild <app>  # force rebuild of buildpack
-    version                # commit hash of deployed app
+    rev-parse              # commit hash of deployed app
     list                   # list all apps
     list:all               # list mapping of apps, containers, commit
 EOF
