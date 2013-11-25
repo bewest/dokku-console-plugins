@@ -1,4 +1,3 @@
-
 # dokku-console - plugins for dokku
 
 Some docker/console related plugins for dokku.
@@ -14,7 +13,7 @@ $ dokku help
     plugins-install Install active plugins
     plugins         Print active plugins
     prompt <app>           # live prompt in your app's container
-    version                # commit hash of deployed app
+    rev-parse              # commit hash of deployed app
 
 ```
 
